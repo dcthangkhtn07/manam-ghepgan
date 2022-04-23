@@ -1,0 +1,9 @@
+﻿<h1>Index ABC</h1>
+
+@foreach(var item in Model.NewsList)
+{
+    <hr/>
+    <h2>@item.Title</h2>
+    <p>@item.Description</p>
+    <p>@item.CreatedDate</p>
+}
