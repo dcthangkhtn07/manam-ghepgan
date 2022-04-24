@@ -14,9 +14,7 @@ namespace Manam.GhepGan.DAL.Configurations
         {
             entity.ToTable("account");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.Property(e => e.CreatedBy).HasColumnName("created_by");
 
@@ -28,6 +26,15 @@ namespace Manam.GhepGan.DAL.Configurations
 
             entity.Property(e => e.IsDeleted).HasColumnName("is_deleted");
 
+            entity.Property(e => e.LastIpLogin)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("last_ip_login");
+
+            entity.Property(e => e.LastLoginDate)
+                .HasColumnType("datetime")
+                .HasColumnName("last_login_date");
+
             entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
 
             entity.Property(e => e.ModifiedDate)
@@ -36,7 +43,7 @@ namespace Manam.GhepGan.DAL.Configurations
 
             entity.Property(e => e.Password)
                 .IsRequired()
-                .IsUnicode(false)
+                .HasMaxLength(200)
                 .HasColumnName("password");
 
             entity.Property(e => e.Username)
@@ -44,6 +51,11 @@ namespace Manam.GhepGan.DAL.Configurations
                 .HasMaxLength(128)
                 .IsUnicode(false)
                 .HasColumnName("username");
+
+            entity.Property(e => e.VersionNo)
+                .IsRowVersion()
+                .IsConcurrencyToken()
+                .HasColumnName("version_no");
 
             OnConfigurePartial(entity);
         }

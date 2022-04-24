@@ -13,10 +13,8 @@ namespace Manam.GhepGan.DAL
         public long? ReplyToId { get; set; }
         public string Content { get; set; }
         public string Status { get; set; }
-        public long? CreatedBy { get; set; }
-        public DateTime? CreatedDate { get; set; }
-        public long ModifiedBy { get; set; }
-        public DateTime ModifiedDate { get; set; }
-        public byte[] VersionNo { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string Email { get; set; }
     }
 }

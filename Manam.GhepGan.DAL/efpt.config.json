@@ -1,6 +1,6 @@
 ﻿{
    "CodeGenerationMode": 2,
-   "ContextClassName": "GhepGanDbContext",
+   "ContextClassName": "GhepganDbContext",
    "ContextNamespace": null,
    "DefaultDacpacSchema": null,
    "FilterSchemas": false,
@@ -14,10 +14,6 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
-         "Name": "[dbo].[access_token]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[account]",
          "ObjectType": 0
       },
@@ -30,7 +26,7 @@
          "ObjectType": 0
       }
    ],
-   "UiHint": "LAPTOP-R5MM3O0S\\SQLEXPRESS.manam_ghepgan",
+   "UiHint": "DESKTOP-CU9468T\\SQLEXPRESS.manam_ghepgan",
    "UseBoolPropertiesWithoutDefaultSql": true,
    "UseDatabaseNames": false,
    "UseDbContextSplitting": true,

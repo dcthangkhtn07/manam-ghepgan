@@ -18,6 +18,7 @@ namespace Manam.GhepGan.DAL.Configurations
 
             entity.Property(e => e.Avatar)
                 .IsRequired()
+                .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("avatar");
 
@@ -49,7 +50,7 @@ namespace Manam.GhepGan.DAL.Configurations
 
             entity.Property(e => e.UrlAlias)
                 .IsRequired()
-                .HasMaxLength(512)
+                .HasMaxLength(500)
                 .IsUnicode(false)
                 .HasColumnName("url_alias");
 

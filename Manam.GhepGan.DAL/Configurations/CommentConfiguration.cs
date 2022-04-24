@@ -20,11 +20,17 @@ namespace Manam.GhepGan.DAL.Configurations
                 .IsRequired()
                 .HasColumnName("content");
 
-            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.CreatedBy)
+                .IsRequired()
+                .HasColumnName("created_by");
 
             entity.Property(e => e.CreatedDate)
                 .HasColumnType("datetime")
                 .HasColumnName("created_date");
+
+            entity.Property(e => e.Email)
+                .IsRequired()
+                .HasColumnName("email");
 
             entity.Property(e => e.EntityId).HasColumnName("entity_id");
 
@@ -34,12 +40,6 @@ namespace Manam.GhepGan.DAL.Configurations
                 .IsUnicode(false)
                 .HasColumnName("entity_type");
 
-            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
-
-            entity.Property(e => e.ModifiedDate)
-                .HasColumnType("datetime")
-                .HasColumnName("modified_date");
-
             entity.Property(e => e.ReplyToId).HasColumnName("reply_to_id");
 
             entity.Property(e => e.Status)
@@ -47,12 +47,6 @@ namespace Manam.GhepGan.DAL.Configurations
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("status");
-
-            entity.Property(e => e.VersionNo)
-                .IsRequired()
-                .IsRowVersion()
-                .IsConcurrencyToken()
-                .HasColumnName("version_no");
 
             OnConfigurePartial(entity);
         }

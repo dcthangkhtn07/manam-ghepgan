@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\User\Views\Shared\" />
+    <ProjectReference Include="..\Manam.GhepGan.Business\Manam.GhepGan.Business.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Manam.GhepGan.Business\Manam.GhepGan.Business.csproj" />
+    <Content Update="Areas\User\Views\_ViewImports.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

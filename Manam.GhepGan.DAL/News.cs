@@ -9,13 +9,13 @@ namespace Manam.GhepGan.DAL
     {
         public long Id { get; set; }
         public string Avatar { get; set; }
-        public string Title { get; set; }
         public string UrlAlias { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
         public string Content { get; set; }
-        public long CreatedBy { get; set; }
+        public Guid CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
-        public long? ModifiedBy { get; set; }
+        public Guid? ModifiedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public long ViewCount { get; set; }
         public bool IsDeleted { get; set; }

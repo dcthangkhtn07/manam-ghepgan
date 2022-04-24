@@ -19,14 +19,12 @@ namespace Manam.GhepGan.DAL
         {
         }
 
-        public virtual DbSet<AccessToken> AccessTokens { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<News> News { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new Configurations.AccessTokenConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.AccountConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.CommentConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.NewsConfiguration());
