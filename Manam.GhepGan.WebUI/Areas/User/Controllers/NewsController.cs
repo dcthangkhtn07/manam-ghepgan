@@ -34,10 +34,11 @@ namespace Manam.GhepGan.WebUI.Areas.User.Controllers
             var pageIndex = page ?? 1;
 
             var itemsPerPage = 10;
-            var offset = (pageIndex - 1) * itemsPerPage + 1;
+            var offset = (pageIndex - 1) * itemsPerPage;
 
             NewsListViewModel model = new NewsListViewModel();
             model.NewsList = _newsBusiness.GetNewsList(offset, itemsPerPage);
+            model.TotalItems = _newsBusiness.GetNewsCount();
 
             return View(model);
         }

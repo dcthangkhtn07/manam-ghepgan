@@ -29,7 +29,8 @@ namespace Manam.GhepGan.Business
                 Title = newsDetail.Title,
                 Content = newsDetail.Content,
                 CreatedDate = newsDetail.CreatedDate.ToString("dd-MM-yyyy"),
-                ViewCount = newsDetail.ViewCount
+                ViewCount = newsDetail.ViewCount,
+                Description = newsDetail.Description,
             };
 
             return model;
@@ -46,12 +47,20 @@ namespace Manam.GhepGan.Business
                              Title = n.Title,
                              Description = n.Description,
                              CreatedDate = n.CreatedDate.ToString("dd-MM-yyyy"),
-                             ViewCount = n.ViewCount
+                             ViewCount = n.ViewCount,
+                             Avatar = n.Avatar,
+                             UrlAlias = n.UrlAlias
                          });
 
             var newsList = query.Skip(offset).Take(limit).ToList();
 
             return newsList;
         }
+
+        public int GetNewsCount()
+        {
+            var count = _dbContext.News.Select(s => !s.IsDeleted).Count();
+            return count;
+        }    
     }
 }

@@ -1,9 +1,77 @@
 ﻿@model NewsListViewModel
 
-@foreach(var item in Model.NewsList)
-{
-    <hr/>
-    <h2>@item.Title</h2>
-    <p>@item.Description</p>
-    <p>@item.CreatedDate</p>
-}
+<div class="container-fluid" style="background: url('/images/grid-dark.png') center repeat; background-size: auto auto;">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="~/">Trang Chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tin tức</li>
+            </ol>
+        </nav>
+        <h3>Tin Tức</h3>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @foreach (var item in Model.NewsList)
+            {
+                <div class="card news-item mt-30">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="~/images/news/@item.Avatar" class="img-fluid rounded-start" alt="Image">
+                        </div>
+                        <div class="col-md-9">
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="/tin-tuc/@item.UrlAlias">@item.Title</a></h5>
+                                <p class="card-text text-muted"><i class="fa fa-calendar me-1" aria-hidden="true"></i>@item.CreatedDate</p>
+                                <p class="card-text">@item.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center mt-30" id="newsListPagination">
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<script>
+    var newsList = {
+        totalItems: '@Model.TotalItems',
+        newsListPagination: $('#newsListPagination'),
+        init: function(){
+            var pageIndex = 1;
+            if(getUrlParameter('page')) {
+                pageIndex = parseInt(getUrlParameter('page'));
+            }
+            var totalPage = Math.ceil(newsList.totalItems / 10);
+            var pageItems = pagination(pageIndex, totalPage);
+
+            newsList.newsListPagination.html('');
+
+            for (var i = 0; i < pageItems.length; i++) {
+                var hrefTag = document.createElement('a');
+                hrefTag.setAttribute('class', 'page-link');
+                hrefTag.setAttribute('href', '/tin-tuc?page=' + (i + 1));
+                hrefTag.innerHTML = pageItems[i];
+
+                var pageItemTag = document.createElement('li');
+                if (pageItems[i] == pageIndex) {
+                    pageItemTag.setAttribute('class', 'page-item active');
+                } else {
+                   pageItemTag.setAttribute('class', 'page-item');
+                }
+                pageItemTag.appendChild(hrefTag);
+                newsList.newsListPagination.append(pageItemTag.outerHTML);
+            }
+        }
+    }
+
+    $(document).ready(function(){
+        newsList.init();
+    })
+</script>

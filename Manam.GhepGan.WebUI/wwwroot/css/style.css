@@ -112,10 +112,6 @@ body {
     line-height: 27px;
 }
 
-img {
-    width: 100%;
-}
-
 .question-list .accordion-item {
     font-weight: 600;
     margin-top: 5px;
@@ -147,7 +143,7 @@ img {
 .news .card-body {
     font-size: 14px;
     color: #333333;
-    height: 170px;
+    height: 178px;
     overflow: hidden;
 }
 
@@ -208,16 +204,8 @@ img {
     color: #EAEAEA;
 }
 
-#owl-carousel {
-    height: 75vh;
-}
-
-.owl-carousel .item {
-    height: 100%;
-}
-
 .owl-carousel .item img {
-    height: 100%;
+    height: 75vh;
 }
 
 .owl-nav {
@@ -232,8 +220,8 @@ img {
     padding: 20px;
     background-color: #F2FFFE;
     position: absolute;
-    top: 250;
-    left: 350;
+    top: 250px;
+    left: 350px;
     width: 550px;
     height: 240px;
     border-radius: 20px;
@@ -273,6 +261,7 @@ img {
 
 .news-item {
     background-color: #F7F7F7;
+    border-color: #F7F7F7;
 }
 
 .breadcrumb .breadcrumb-item {
@@ -285,10 +274,47 @@ img {
     color: #6c757d;
 }
 
+.news img {
+    height: 250px;
+}
+
+#mySidenav div {
+    position: fixed;
+    right: -205px;
+    transition: 0.3s;
+    width: 280px;
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    z-index: 9999;
+}
+
+    #mySidenav div:hover {
+        right: 0;
+    }
+
+#contact {
+    top: 200px;
+}
+
+.ssb-light-hover li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.ssb-light-hover a {
+    transition: all 0.5s ease 0s;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+}
+
+
 @media only screen and (max-width: 992px) {
     .owl-carousel-caption {
-        top: 300;
-        left: 150;
+        top: 300px;
+        left: 150px;
     }
 }
 
@@ -306,6 +332,13 @@ img {
         text-align: center;
         font-size: 20px;
     }
+    img {
+        width: 100%;
+    }
 }
 
-@media only screen and (max-width: 600px) {}
+@media only screen and (max-width: 600px) {
+    img {
+        width: 100%;
+    }
+}

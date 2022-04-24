@@ -7,5 +7,7 @@ namespace Manam.GhepGan.Business.Interfaces
         List<NewsItem> GetNewsList(int offset, int limit);
 
         NewsDetailViewModel? GetNewsDetail(string urlAlias);
+
+        int GetNewsCount();
     }
 }

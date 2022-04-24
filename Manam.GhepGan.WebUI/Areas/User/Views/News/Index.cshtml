@@ -1,5 +1,21 @@
 ﻿@model NewsDetailViewModel
 
-<h2>@Model.Title</h2>
-<p>@Model.Description</p>
-<p>@Model.CreatedDate</p>
+<div class="container-fluid" style="background: url('/images/grid-dark.png') center repeat; background-size: auto auto;">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="~/">Trang Chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+            </ol>
+        </nav>
+        <h3>@Model.Title</h3>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p class="mt-30"><strong>@Model.Description</strong></p>
+            @Html.Raw(Model.Content)
+        </div>
+    </div>
+</div>
