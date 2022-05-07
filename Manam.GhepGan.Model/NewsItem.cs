@@ -4,7 +4,7 @@
     {
         public long Id { get; set; }
 
-        public string Avatar { get; set; }
+        public string Avatar { get; set; } = string.Empty;
 
         public string Title { get; set; } = string.Empty;
 

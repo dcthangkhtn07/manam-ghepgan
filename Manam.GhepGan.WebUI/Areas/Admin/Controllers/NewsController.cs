@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Manam.GhepGan.Business.Interfaces;
+using Manam.GhepGan.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Manam.GhepGan.WebUI.Areas.Admin.Controllers
@@ -7,9 +9,35 @@ namespace Manam.GhepGan.WebUI.Areas.Admin.Controllers
     [Authorize]
     public class NewsController : Controller
     {
-        public IActionResult Index()
+        private readonly INewsBusiness _newsBusiness;
+
+        public NewsController(INewsBusiness newsBusiness)
         {
-            return View();
+            _newsBusiness = newsBusiness;
+        }
+
+        public IActionResult Index(long? id)
+        {
+            var newsId = id ?? 0;
+            var model = new NewsViewModel();
+            if (newsId != 0)
+            {
+                model = _newsBusiness.GetNewsData(newsId);
+            }
+
+            if (string.IsNullOrEmpty(model.Avatar))
+            {
+                model.Avatar = "news.png";
+            }
+
+            return View(model);
+        }
+
+        public IActionResult List()
+        {
+            NewsListViewModel model = new NewsListViewModel();
+            model.NewsList = _newsBusiness.GetNewsList(0, 1000);
+            return View(model);
         }
     }
 }

@@ -9,5 +9,7 @@ namespace Manam.GhepGan.Business.Interfaces
         NewsDetailViewModel? GetNewsDetail(string urlAlias);
 
         int GetNewsCount();
+
+        NewsViewModel GetNewsData(long id);
     }
 }

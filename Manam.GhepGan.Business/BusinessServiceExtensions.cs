@@ -8,6 +8,7 @@ namespace Manam.GhepGan.Business
         public static IServiceCollection AddBusiness(this IServiceCollection services)
         {
             services.AddTransient<INewsBusiness, NewsBusiness>();
+            services.AddTransient<IIdentityBusiness, IdentityBusiness>();
 
             return services;
         }

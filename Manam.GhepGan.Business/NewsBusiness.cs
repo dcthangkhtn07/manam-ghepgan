@@ -61,6 +61,26 @@ namespace Manam.GhepGan.Business
         {
             var count = _dbContext.News.Select(s => !s.IsDeleted).Count();
             return count;
-        }    
+        }
+
+        public NewsViewModel GetNewsData(long id)
+        {
+            var news = _dbContext.News.FirstOrDefault(f => f.Id == id);
+            if(news != null)
+            {
+                NewsViewModel response = new NewsViewModel
+                {
+                    Id = news.Id,
+                    Title = news.Title,
+                    Content = news.Content,
+                    Description = news.Description,
+                    Avatar = news.Avatar,
+                };
+
+                return response;
+            }
+
+            return new NewsViewModel();
+        }
     }
 }

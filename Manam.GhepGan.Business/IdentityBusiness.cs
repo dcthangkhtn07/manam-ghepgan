@@ -1,10 +1,12 @@
-﻿using Manam.GhepGan.Business.Interfaces;
-using Manam.GhepGan.DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Manam.GhepGan.Business.Interfaces;
+using Manam.GhepGan.DAL;
+using Manam.GhepGan.Model;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using BC = BCrypt.Net.BCrypt;
 
 namespace Manam.GhepGan.Business
@@ -18,9 +20,19 @@ namespace Manam.GhepGan.Business
             _dbContext = dbContext;
         }
 
-        public bool Login(string username, string password)
+        public AccountModel? GetUserLogin(string username, string password)
         {
-            var account = _dbContext.Accounts.SingleOrDefault(s => s.Username == request.Data.Username);
+            var account = _dbContext.Accounts.FirstOrDefault(s => s.Username == username);
+            if (account != null && BC.Verify(password, account.Password))
+            {
+                var response = new AccountModel
+                {
+                    Username = username
+                };
+
+                return response;
+            }
+            return null;
         }
     }
 }

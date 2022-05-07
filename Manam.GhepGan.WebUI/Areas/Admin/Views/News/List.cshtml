@@ -1,0 +1,51 @@
+﻿@model NewsListViewModel
+@{
+    ViewData["Title"] = "Danh Sách Bài Viết";
+}
+
+<div class="card mb-5 mb-xl-8">
+    <div class="card-header border-0 pt-5">
+        <h3 class="card-title align-items-start flex-column">
+            <span class="card-label fw-bolder fs-3 mb-1">Danh Sách Bài Viết</span>
+        </h3>
+        <div class="card-toolbar">
+            <a href="/Admin/News" class="btn btn-sm btn-light btn-active-primary">
+                <span class="svg-icon svg-icon-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black"></rect>
+                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"></rect>
+                    </svg>
+                </span>Thêm Bài Viết
+            </a>
+        </div>
+    </div>
+    <div class="card-body py-3">
+        <div class="table-responsive">
+            <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                <thead>
+                    <tr class="fw-bolder text-muted">
+                        <th class="min-w-75px">Avatar</th>
+                        <th class="min-w-150px">Tên Bài Viết</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.NewsList)
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="symbol symbol-75px me-5">
+                                        <img src="~/images/news/@item.Avatar" alt="Avatar">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="/Admin/News?Id=@item.Id" class="text-dark fw-bolder text-hover-primary d-block fs-6">@item.Title</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

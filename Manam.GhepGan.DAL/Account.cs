@@ -10,8 +10,8 @@ namespace Manam.GhepGan.DAL
         public Guid Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public Guid CreatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public Guid? CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
         public Guid? ModifiedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public DateTime? LastLoginDate { get; set; }

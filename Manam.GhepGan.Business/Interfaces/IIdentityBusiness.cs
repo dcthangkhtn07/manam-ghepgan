@@ -1,7 +1,9 @@
-﻿namespace Manam.GhepGan.Business.Interfaces
+﻿using Manam.GhepGan.Model;
+
+namespace Manam.GhepGan.Business.Interfaces
 {
     public interface IIdentityBusiness
     {
-        bool Login(string username, string password);
+        AccountModel? GetUserLogin(string username, string password);
     }
 }

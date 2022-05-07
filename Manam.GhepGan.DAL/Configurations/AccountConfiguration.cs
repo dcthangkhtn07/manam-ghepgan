@@ -47,7 +47,7 @@ namespace Manam.GhepGan.DAL.Configurations
                 .HasColumnName("password");
 
             entity.Property(e => e.Username)
-                .IsRequired()
+                //.IsRequired()
                 .HasMaxLength(128)
                 .IsUnicode(false)
                 .HasColumnName("username");

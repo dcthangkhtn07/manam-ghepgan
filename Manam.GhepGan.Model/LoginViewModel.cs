@@ -1,4 +1,6 @@
-﻿namespace Manam.GhepGan.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Manam.GhepGan.Model
 {
     public class LoginViewModel
     {
