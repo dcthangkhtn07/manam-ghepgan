@@ -1,4 +1,6 @@
-﻿namespace Manam.GhepGan.Model
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Manam.GhepGan.Model
 {
     public class NewsViewModel
     {
@@ -11,5 +13,9 @@
         public string Description { get; set; } = string.Empty;
 
         public string Content { get; set; } = string.Empty;
+
+        public Guid CreatedBy { get; set; }
+
+        public IFormFile File { get; set; }
     }
 }

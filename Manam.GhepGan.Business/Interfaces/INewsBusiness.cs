@@ -11,5 +11,11 @@ namespace Manam.GhepGan.Business.Interfaces
         int GetNewsCount();
 
         NewsViewModel GetNewsData(long id);
+
+        long InsertNews(NewsViewModel news);
+
+        long UpdateNews(NewsViewModel news);
+
+        bool DeleteNews(long id);
     }
 }

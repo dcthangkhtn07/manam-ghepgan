@@ -1,7 +1,7 @@
 ﻿using Manam.GhepGan.Business.Interfaces;
+using Manam.GhepGan.Business.Utils;
 using Manam.GhepGan.DAL;
 using Manam.GhepGan.Model;
-using System.Linq;
 
 namespace Manam.GhepGan.Business
 {
@@ -66,7 +66,7 @@ namespace Manam.GhepGan.Business
         public NewsViewModel GetNewsData(long id)
         {
             var news = _dbContext.News.FirstOrDefault(f => f.Id == id);
-            if(news != null)
+            if (news != null)
             {
                 NewsViewModel response = new NewsViewModel
                 {
@@ -81,6 +81,59 @@ namespace Manam.GhepGan.Business
             }
 
             return new NewsViewModel();
+        }
+
+        public long InsertNews(NewsViewModel model)
+        {
+            News news = new News
+            {
+                Avatar = model.Avatar,
+                Title = model.Title,
+                Description = model.Description,
+                Content = model.Content,
+                UrlAlias = model.Title.GenerateSlug(),
+                CreatedBy = model.CreatedBy,
+                CreatedDate = DateTime.Now,
+            };
+
+            _dbContext.News.Add(news);
+            _dbContext.SaveChanges();
+
+            return news.Id;
+        }
+
+        public long UpdateNews(NewsViewModel model)
+        {
+            var news = _dbContext.News.FirstOrDefault(f => f.Id == model.Id);
+            if(news != null)
+            {
+                news.Avatar = string.IsNullOrEmpty(model.Avatar) ? news.Avatar : model.Avatar;
+                news.Title = model.Title;
+                news.Description = model.Description;
+                news.Content = model.Content;
+                news.UrlAlias = model.Title.GenerateSlug();
+                news.ModifiedBy = model.CreatedBy;
+                news.ModifiedDate = DateTime.Now;
+
+                _dbContext.News.Update(news);
+                _dbContext.SaveChanges();
+            }
+
+            return model.Id;
+        }
+
+        public bool DeleteNews(long id)
+        {
+            var news = _dbContext.News.FirstOrDefault(f => f.Id == id);
+            if (news != null)
+            {
+                news.IsDeleted = true;
+
+                _dbContext.News.Update(news);
+                _dbContext.SaveChanges();
+            }
+
+            return true;
         }
     }
 }

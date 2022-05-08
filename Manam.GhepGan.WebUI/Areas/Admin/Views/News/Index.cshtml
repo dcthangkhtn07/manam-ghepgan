@@ -10,9 +10,10 @@
         </div>
     </div>
     <form id="newsForm" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+        <input type="hidden" id="id" name="id" value="@Model.Id" />
         <div class="card-body border-top p-9">
             <div class="row mb-6">
-                <label class="col-lg-3 col-form-label fw-bold fs-6">Avatar</label>
+                <label class="col-lg-3 col-form-label required fw-bold fs-6">Avatar</label>
                 <div class="col-lg-9">
                     <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
                         <div class="image-input-wrapper w-125px h-125px" style="background-image: url('../images/news/@Model.Avatar')"></div>
@@ -21,7 +22,7 @@
                                 <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black" />
                                 <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black" />
                             </svg>
-                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg">
+                            <input type="file" id="avatar" name="avatar" accept=".png, .jpg, .jpeg">
                         </label>
                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="Xóa avatar">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -64,8 +65,8 @@
             }
             else
             {
-                <a href="javacript:void(0)" class="btn btn-danger me-2">Xóa</a>
-                <a href="javacript:void(0)" class="btn btn-primary">Cập Nhật</a>
+                <button type="button" onclick="news.deleteNews()" class="btn btn-danger me-2">Xóa</button>
+                <button type="button" onclick="news.submitForm()" class="btn btn-primary">Cập Nhật</button>
             }
         </div>
     </form>
@@ -74,6 +75,7 @@
 <script>
     var news = {
         newsForm: $('#newsForm'),
+        newsId: '@Model.Id',
         init: function() {
             news.newsForm.validate({
             ignore: [],
@@ -81,37 +83,107 @@
             onkeyup: false,
             onclick: false,
             rules: {
-                //'title': {
-                //    dhlRequired: true,
-                //},
-                //'description': {
-                //    dhlRequired: true,
-                //},
-                'content': {
-                     required: function()
-                     {
-                         CKEDITOR.instances.content.updateElement();
-                         return false;
-                     },
-                }
+                'title': {
+                    dhlRequired: true,
+                },
+                'description': {
+                    dhlRequired: true,
+                },
             },
-            messages: {
-                cktext:{
-                    required:'Nội Dung không được để trống',
-                }
-            }
             });
         },
 
         submitForm: function(){
-            if (news.newsForm.valid()) {
-                alert('OK');
+            var hasContent = true,
+                hasAvatar = true;
+
+            console.log(news.newsId);
+
+            if(news.newsId == 0) {
+                if($('#avatar')[0].files[0] == undefined) {
+                    hasAvatar = false;
+                    $('.image-input-outline').closest('.col-lg-9').append('<span id="title-error" class="validation-error-2">Avatar không được để trống.</span>');
+                }
+                else {
+                    hasAvatar = true;
+                    $('.image-input-outline').closest('.col-lg-9').find('span.validation-error-2').remove();
+                }
+            }
+
+            if(CKEDITOR.instances.content.getData() == '') {
+                hasContent = false;
+                $('#content').closest('.col-lg-9').append('<span id="title-error" class="validation-error-2">Nội dung không được để trống.</span>');
+            }
+            else {
+                hasContent = true;
+                $('#content').closest('.col-lg-9').find('span.validation-error-2').remove();
+            }
+
+            if(news.newsForm.valid() && hasAvatar && hasContent) {
+                var formData = new FormData();
+                if($('#avatar')[0].files[0] != undefined) {
+                    formData.append('file', $('#avatar')[0].files[0]);
+                }
+                
+                $.each(news.newsForm.serializeArray(), function() {
+                    if(this.name == 'content') {
+                        formData.append(this.name, CKEDITOR.instances.content.getData());
+                    }
+                    else {
+                        formData.append(this.name, this.value);
+                    }
+                });
+
+                $.ajax({
+                    url: '/Admin/News/Index',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(result) {
+                        switch (result.status) {
+                            case 'OK': {
+                                window.location.href = "/Admin/News/List";
+                                break;
+                            };
+
+                            case 'Error': {
+                                break;
+                            }
+                        }
+                    }
+                });
+            }
+        },
+
+        deleteNews: function(){
+            var r = confirm('Bạn muốn xóa bài viết này?');
+            if(r) {
+                $.ajax({
+                    url: '/Admin/News/Delete',
+                    type: 'POST',
+                    data: {
+                        id: news.newsId
+                    },
+                    success: function(result) {
+                        switch (result.status) {
+                            case 'OK': {
+                                window.location.href = "/Admin/News/List";
+                                break;
+                            };
+
+                            case 'Error': {
+                                break;
+                            }
+                        }
+                    }
+                });
             }
         }
     }
 
     $(document).ready(function () {
-        CKEDITOR.replace("content");
+        CKEDITOR.replace('content');
         news.init();
     });
 </script>
