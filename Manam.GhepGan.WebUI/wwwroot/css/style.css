@@ -1,5 +1,5 @@
 body {
-    font-family: 'Noto Serif', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
 .liver-transplantation-navigation {
@@ -18,7 +18,7 @@ body {
     text-transform: uppercase;
     color: #333333 !important;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .liver-transplantation-navigation ul li a:hover {
@@ -42,14 +42,14 @@ body {
 
 .statistic-description {
     color: #cfaf56;
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: 600;
     line-height: 1.5;
     text-transform: uppercase;
 }
 
 .sub-heading {
-    font-size: 13px;
+    font-size: 1rem;
     color: #016869 !important;
     line-height: 1.3;
     font-weight: 600;
@@ -68,7 +68,7 @@ body {
 }
 
 .general-content p {
-    font-size: 10pt;
+    font-size: 1rem;
 }
 
 .heading {
@@ -84,7 +84,7 @@ body {
 .introduce-content {
     text-align: center;
     color: #555555;
-    font-size: 13px;
+    font-size: 1rem;
     line-height: 1.7;
     margin: auto;
 }
@@ -103,12 +103,12 @@ body {
 
 .procedure-content {
     color: #EAEAEA;
-    font-size: 13px;
+    font-size: 1rem;
 }
 
 .hospital-list {
     color: #000000;
-    font-size: 13px;
+    font-size: 1rem;
     line-height: 27px;
 }
 
@@ -119,12 +119,12 @@ body {
 
 .problems-content {
     color: #EAEAEA;
-    font-size: 13px;
+    font-size: 1rem;
     padding: 20px;
 }
 
 .news .card-title a {
-    font-size: 14px;
+    font-size: 1.25rem;
     font-weight: 600;
     text-decoration: none;
     color: #333333;
@@ -141,15 +141,15 @@ body {
 }
 
 .news .card-body {
-    font-size: 14px;
+    font-size: 1rem;
     color: #333333;
-    height: 178px;
+    height: 173px;
     overflow: hidden;
 }
 
 .company-footer {
     padding: 20px;
-    font-size: 14px;
+    font-size: 1rem;
     line-height: 25px;
     color: #EAEAEA;
 }
@@ -161,7 +161,7 @@ body {
 
 .footer {
     color: #EAEAEA;
-    font-size: 14px;
+    font-size: 1rem;
 }
 
 .company-footer img {
@@ -247,7 +247,7 @@ body {
 .news-item .card-title a {
     text-decoration: none;
     color: #000000;
-    font-size: 16px;
+    font-size: 1.25rem;
     font-weight: 600;
 }
 
@@ -256,7 +256,7 @@ body {
 }
 
 .news-item .card-text {
-    font-size: 13px;
+    font-size: 1rem;
 }
 
 .news-item {
